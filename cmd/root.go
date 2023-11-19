@@ -26,7 +26,7 @@ var logs *zap.SugaredLogger
 // init logs
 func init() {
 	if zapLog, err := zap.NewDevelopment(); err != nil {
-		log.Fatal("zap log init failed")
+		log.Fatal("zap log init error", err)
 	} else {
 		logs = zapLog.Sugar()
 	}
@@ -36,6 +36,6 @@ func init() {
 func FlushLog() {
 	err := logs.Sync()
 	if err != nil {
-		log.Fatal("zap log sync failed")
+		log.Fatal("zap log sync error", err)
 	}
 }
