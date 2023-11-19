@@ -1,9 +1,8 @@
 module tcpractice
 
-go 1.19
+go 1.20
 
 require (
-	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/spf13/cobra v1.8.0
 	go.uber.org/zap v1.26.0
 )

@@ -32,7 +32,7 @@ func shortConnClient(cmd *cobra.Command, args []string) {
 }
 
 func nonPersistentConn() {
-	conn, err := net.Dial("tcp", echoServerParam.Endpoint)
+	conn, err := net.Dial("tcp", shortConnParam.Endpoint)
 	if err != nil {
 		logs.Fatal("dial tcp conn failed", err)
 	}
