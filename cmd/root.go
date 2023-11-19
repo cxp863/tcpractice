@@ -2,7 +2,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"log/slog"
+	"go.uber.org/zap"
+	"log"
 )
 
 var rootCmd = &cobra.Command{
@@ -12,12 +13,29 @@ var rootCmd = &cobra.Command{
 	Run:   rootFunc,
 }
 
-func rootFunc(cmd *cobra.Command, args []string) {
-	slog.Info("tcp-practice init OK")
-}
+func rootFunc(cmd *cobra.Command, args []string) {}
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		panic(err)
+	}
+}
+
+var logs *zap.SugaredLogger
+
+// init logs
+func init() {
+	if zapLog, err := zap.NewDevelopment(); err != nil {
+		log.Fatal("zap log init failed")
+	} else {
+		logs = zapLog.Sugar()
+	}
+}
+
+// FlushLog flush logs
+func FlushLog() {
+	err := logs.Sync()
+	if err != nil {
+		log.Fatal("zap log sync failed")
 	}
 }
